@@ -6,6 +6,7 @@
 #include "Components/Combat/PawnCombatComponent.h"
 #include "HeroCombatComponent.generated.h"
 
+class AWarriorHeroWeapon;
 /**
  * 
  */
@@ -13,5 +14,7 @@ UCLASS()
 class UNREALCOMBATMECHANICS_API UHeroCombatComponent : public UPawnCombatComponent
 {
 	GENERATED_BODY()
-	
+public:
+	UFUNCTION(BlueprintCallable, Category="Warriot | Combat")
+	AWarriorHeroWeapon* GetWarriorHeroWeaponByTag(FGameplayTag weaponTag) const;
 };

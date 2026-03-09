@@ -6,6 +6,7 @@
 #include "AnimInstances/WarriorBaseAnimInstance.h"
 #include "WarriorHeroLinkedAnimLayer.generated.h"
 
+class UWarriorHeroAnimInstance;
 /**
  * 
  */
@@ -13,5 +14,7 @@ UCLASS()
 class UNREALCOMBATMECHANICS_API UWarriorHeroLinkedAnimLayer : public UWarriorBaseAnimInstance
 {
 	GENERATED_BODY()
+	UFUNCTION(BlueprintPure, meta = (BlueprintThreadSafe))
+	UWarriorHeroAnimInstance* GetHeroAnimInstance() const;
 	
 };
