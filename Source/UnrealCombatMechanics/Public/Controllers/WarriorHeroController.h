@@ -13,5 +13,7 @@ UCLASS()
 class UNREALCOMBATMECHANICS_API AWarriorHeroController : public APlayerController
 {
 	GENERATED_BODY()
-	
+public:
+	UFUNCTION(BlueprintCallable)
+	void SwitchInputContext();
 };

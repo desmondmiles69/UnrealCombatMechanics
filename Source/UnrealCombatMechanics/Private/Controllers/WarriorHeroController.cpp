@@ -3,3 +3,7 @@
 
 #include "UnrealCombatMechanics/Public/Controllers/WarriorHeroController.h"
 
+void AWarriorHeroController::SwitchInputContext()
+{
+	UE_LOG(LogTemp, Warning, TEXT("InputContext hero controller"));
+}

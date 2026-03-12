@@ -17,7 +17,7 @@ AWarriorHeroCharacter* UWarriorHeroGameplayAbility::GetHeroCharacterFromActorInf
 
 AWarriorHeroController* UWarriorHeroGameplayAbility::GetHeroControllerFromActorInfo()
 {
-	if(CachedWarriorHeroController.IsValid())
+	if(!CachedWarriorHeroController.IsValid())
 	{
 		CachedWarriorHeroController = Cast<AWarriorHeroController>(CurrentActorInfo->PlayerController);
 	}
