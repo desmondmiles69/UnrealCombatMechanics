@@ -7,7 +7,7 @@
 #include "WarriorWeaponBase.generated.h"
 
 class UBoxComponent;
-
+DECLARE_DELEGATE_OneParam(FOnTargetInterectedDelegate, AActor*)
 UCLASS()
 class UNREALCOMBATMECHANICS_API AWarriorWeaponBase : public AActor
 {
@@ -16,11 +16,20 @@ class UNREALCOMBATMECHANICS_API AWarriorWeaponBase : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AWarriorWeaponBase();
+
+	FOnTargetInterectedDelegate OnWeaponHitTarget;
+	FOnTargetInterectedDelegate OnWeaponPulledFromTarget;
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapons")
 	UStaticMeshComponent* WeaponMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapons")
 	UBoxComponent* WeaponCollisionBox;
+
+	UFUNCTION()
+	virtual void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
+
+	UFUNCTION()
+	virtual void OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 public:
 	FORCEINLINE UBoxComponent* GetWeaponCollisionBox() const { return WeaponCollisionBox; }
 

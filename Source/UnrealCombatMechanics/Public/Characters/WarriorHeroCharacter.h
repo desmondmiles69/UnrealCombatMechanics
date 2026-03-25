@@ -21,12 +21,17 @@ class UNREALCOMBATMECHANICS_API AWarriorHeroCharacter : public AWarriorBaseChara
 	GENERATED_BODY()
 public:
 	AWarriorHeroCharacter();
+
+	//~ Begin IPawnCombatInterface Interface.
+	virtual UPawnCombatComponent* GetPawnCombatComponent() override;
+	//~ End IPawnCombatInterface Interface
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	//~ Begin APawn Interface.
 	virtual void PossessedBy(AController* NewController) override;
 	//~ End APawn Interface
+
 
 private:
 #pragma region Components

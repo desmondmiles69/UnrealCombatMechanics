@@ -3,6 +3,7 @@
 
 #include "Components/Combat/PawnCombatComponent.h"
 #include "Items/Weapons/WarriorWeaponBase.h"
+#include "Components/BoxComponent.h"
 
 #include "WarriorDebugHelper.h"
 
@@ -12,6 +13,9 @@ void UPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag weaponTagToRegiste
 	check(weaponToRegister);
 
 	CharacterCarriedWeaponMap.Emplace(weaponTagToRegister, weaponToRegister);
+
+	weaponToRegister->OnWeaponHitTarget.BindUObject(this, &ThisClass::OnHitTargetActor);
+	weaponToRegister->OnWeaponPulledFromTarget.BindUObject(this, &ThisClass::OnWeaponPulledFromTargetActor);
 	if(bRegisterAsEquippedWeapon)
 	{
 		CurrentEquippedWeaponTag = weaponTagToRegister;
@@ -41,4 +45,30 @@ AWarriorWeaponBase* UPawnCombatComponent::GetCharacterCurrentEquippedWeapon() co
 	}
 
 	return GetCharacterCarriedWeaponByTag(CurrentEquippedWeaponTag);
+}
+
+void UPawnCombatComponent::ToggleWeaponCollision(bool bShouldEnable, EToggleDamageType toggleDamageType)
+{
+	if(toggleDamageType == EToggleDamageType::CurrentEquippedWeapon)
+	{
+		AWarriorWeaponBase* currentWeapon = GetCharacterCurrentEquippedWeapon();
+		check(currentWeapon);
+		if(bShouldEnable)
+		{
+			currentWeapon->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::Type::QueryOnly);
+		}
+		else
+		{
+			currentWeapon->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+			OverlappedActors.Empty();
+		}
+	}
+}
+
+void UPawnCombatComponent::OnHitTargetActor(AActor* hitActor)
+{
+}
+
+void UPawnCombatComponent::OnWeaponPulledFromTargetActor(AActor* interactedActor)
+{
 }

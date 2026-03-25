@@ -78,6 +78,11 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 	}
 }
 
+UPawnCombatComponent* AWarriorHeroCharacter::GetPawnCombatComponent()
+{
+	return HeroCombatComponent;
+}
+
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& value)
 {
 	FVector2D moveInputValue = value.Get<FVector2D>();

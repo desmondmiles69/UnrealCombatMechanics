@@ -28,4 +28,7 @@ namespace WarriorGameplayTags
 	
 	/** Enemy Tags **/
 	UNREALCOMBATMECHANICS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Weapon);
+
+	/** Shared Tags **/
+	UNREALCOMBATMECHANICS_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_MeeleHit);
 }

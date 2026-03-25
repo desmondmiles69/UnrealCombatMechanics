@@ -17,4 +17,7 @@ class UNREALCOMBATMECHANICS_API UHeroCombatComponent : public UPawnCombatCompone
 public:
 	UFUNCTION(BlueprintCallable, Category="Warriot | Combat")
 	AWarriorHeroWeapon* GetWarriorHeroWeaponByTag(FGameplayTag weaponTag) const;
+
+	virtual void OnHitTargetActor(AActor* hitActor) override;
+	virtual void OnWeaponPulledFromTargetActor(AActor* interactedActor) override;
 };

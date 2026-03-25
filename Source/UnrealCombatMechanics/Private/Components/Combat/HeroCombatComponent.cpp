@@ -3,8 +3,32 @@
 
 #include "Components/Combat/HeroCombatComponent.h"
 #include "Items/Weapons/WarriorHeroWeapon.h"
+#include "AbilitySystemBlueprintLibrary.h"
+#include "WarriorGameplayTags.h"
+
+#include "WarriorDebugHelper.h"
 
 AWarriorHeroWeapon* UHeroCombatComponent::GetWarriorHeroWeaponByTag(FGameplayTag weaponTag) const
 {
 	return Cast<AWarriorHeroWeapon>(GetCharacterCarriedWeaponByTag(weaponTag));
+}
+
+void UHeroCombatComponent::OnHitTargetActor(AActor* hitActor)
+{
+	if(OverlappedActors.Contains(hitActor))
+	{
+		return;
+	}
+	OverlappedActors.AddUnique(hitActor);
+
+	FGameplayEventData weaponHitData;
+	weaponHitData.Instigator = GetOwningPawn();
+	weaponHitData.Target = hitActor;
+
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetOwningPawn(), WarriorGameplayTags::Shared_Event_MeeleHit, weaponHitData);
+}
+
+void UHeroCombatComponent::OnWeaponPulledFromTargetActor(AActor* interactedActor)
+{
+	  
 }

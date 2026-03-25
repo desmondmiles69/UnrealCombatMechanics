@@ -16,6 +16,10 @@ class UNREALCOMBATMECHANICS_API AWarriorEnemyCharacter : public AWarriorBaseChar
 	GENERATED_BODY()
 public:
 	AWarriorEnemyCharacter();
+
+	//~ Begin IPawnCombatInterface Interface.
+	virtual UPawnCombatComponent* GetPawnCombatComponent() override;
+	//~ End IPawnCombatInterface Interface
 	
 protected:
 	//~ Begin APawn Interface.
